@@ -30,51 +30,40 @@ export function LoginForm() {
     },
   });
 
-  const checkActiveSession = async () => {
-    try {
-      const session = await account.getSession('current');
-      return session;
-    } catch (error) {
-      return null;
-    }
-  };
-
   const onSubmit = async (data: LoginFormData) => {
     try {
       setIsLoading(true);
-      
-      const session = await checkActiveSession();
-  
-      if (session) {
-        router.push('/dashboard');
-        return;
-      }
   
       let user;
       const redirectUrl = "https://localhost:3000/dashboard";
-      
+  
       switch (authMethod) {
         case 'magic-link':
           console.log("Sending magic link to:", data.email);
           await sendMagicLink(data.email, redirectUrl);
           break;
+  
         case 'email-otp':
           console.log("Sending email OTP to:", data.email);
           await sendEmailOTP(data.email);
           break;
+  
         default:
           toast.success("Signing in with email and password");
           user = await signInAccount(data.email, data.password);
           if (user) {
             toast.success("Log in Successful!");
+            router.push("/dashboard");
           }
       }
     } catch (error) {
       console.error("Login error:", error);
+      toast.error(`Login failed: ${error instanceof Error ? error.message : error}`);
     } finally {
       setIsLoading(false);
     }
   };
+   
 
   return (
     <motion.div className="w-full max-w-md mx-auto mt-24 border dark:border-gray-700 rounded-lg">

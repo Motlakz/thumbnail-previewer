@@ -3,9 +3,8 @@ import { Account, Client, ID } from 'appwrite';
 // Client Config
 export const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
 
-// Services
 export const account = new Account(client);
 
 // Auth Functions
@@ -81,20 +80,21 @@ export async function sendEmailOTP(email: string) {
 export async function getCurrentUser() {
     try {
         const currentAccount = await account.get();
-
-        if (!currentAccount) throw Error;
-
-        // Return user information directly from the account
+        // If the account exists, return user details
         return {
             userId: currentAccount.$id,
             email: currentAccount.email,
-            name: currentAccount.name,
-            createdAt: new Date(),
-            updatedAt: new Date()
+            name: currentAccount.name || 'Guest',
+            createdAt: new Date(currentAccount.$createdAt),
+            updatedAt: new Date(currentAccount.$updatedAt),
         };
     } catch (error) {
-        console.error(error);
-        return null;
+        if (error instanceof Error && error.message.includes("missing scope")) {
+            console.warn("Unauthenticated user detected.");
+            return null; // Gracefully return null for unauthenticated users
+        }
+        console.error("Unexpected error:", error);
+        throw error; // For any other unexpected errors, rethrow
     }
 }
 
