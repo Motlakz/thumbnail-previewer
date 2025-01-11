@@ -1,4 +1,4 @@
-import ThumbnailTester from "@/components/ThumbnailTester"
+import ThumbnailTester from "@/components/thumbnail/ThumbnailTester"
 
 const EditorPage = () => {
     return (

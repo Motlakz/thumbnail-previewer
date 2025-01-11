@@ -20,7 +20,7 @@ import {
   Wand2
 } from "lucide-react";
 import Link from "next/link";
-import ThumbnailTester from "@/components/ThumbnailTester";
+import ThumbnailTester from "@/components/thumbnail/ThumbnailTester";
 
 interface FloatingIconProps {
   children: React.ReactNode;

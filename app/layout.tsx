@@ -3,7 +3,7 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/dashboard/Navbar";
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: "Preview thumbnails in real-time with our intuitive tool. See how your images will appear across social media, websites, and more before you publish. Fast, accurate, and perfect for content creators, marketers, and designers.",
   keywords: [
     "thumbnail previewer",
+    "thumbnail checker",
     "thumbnail preview",
     "youtube thumbnail preview",
     "thumbnail previews",
