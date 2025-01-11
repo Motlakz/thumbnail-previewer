@@ -46,19 +46,6 @@ const NotFoundPage = () => {
                     Back to Home Page
                 </Link>
             </motion.article>
-
-            {/* Footer */}
-            <footer className="mt-12 text-sm text-gray-500 dark:text-gray-400">
-                <p>
-                    If you believe this is an error, contact our{" "}
-                    <Link
-                        href="/support"
-                        className="text-cyan-500 dark:text-pink-400 hover:underline"
-                    >
-                        support team
-                    </Link>
-                </p>
-            </footer>
         </section>
     );
 };

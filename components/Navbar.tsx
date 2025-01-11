@@ -62,7 +62,7 @@ export function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+            className={`fixed top-0 z-20 w-full transition-all duration-300 ${
                 isScrolled
                     ? "bg-white/80 backdrop-blur-md dark:bg-gray-950/80 shadow-lg"
                     : "bg-transparent"

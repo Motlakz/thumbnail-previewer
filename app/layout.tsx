@@ -22,8 +22,6 @@ export const metadata: Metadata = {
     "youtube thumbnail tester",
     "youtube thumbnail checker",
     "youtube thumbnail viewer",
-    "pdf thumbnail preview",
-    "pdf thumbnail",
 
     "ai thumbnail generator",
     "ai thumbnail maker",
@@ -39,7 +37,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Universal Thumbnail Previewer | Test Before You Post",
-    description: "Professional thumbnail preview tool for YouTube, PDF, and social media. Instant preview across multiple platforms. Save time with real-time testing.",
+    description: "Professional thumbnail preview tool for YouTube and other socials. Instant preview across multiple platforms. Save time with real-time testing.",
     type: "website",
     locale: "en_US",
     siteName: "Thumbnail Previewer"

@@ -20,6 +20,7 @@ import {
   Wand2
 } from "lucide-react";
 import Link from "next/link";
+import ThumbnailTester from "@/components/ThumbnailTester";
 
 interface FloatingIconProps {
   children: React.ReactNode;
@@ -187,6 +188,9 @@ export default function Home() {
               </motion.div>
             </motion.button>
           </motion.div>
+
+          {/* Thumbnail Previewer */}
+          <ThumbnailTester />
   
           {/* Features Grid */}
           <motion.div 
