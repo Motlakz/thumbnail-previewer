@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components/dashboard/Navbar";
+import { ReactNode } from "react";
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>

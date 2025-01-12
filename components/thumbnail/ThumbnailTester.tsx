@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useEffect, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 import { Upload, Smartphone, Monitor, Tablet, Maximize2, X } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -15,6 +15,7 @@ import TwitterPreview from "../previews/TwitterPreview";
 import ThumbnailMetadataForm from "./ThumbnailMetadataForm";
 import ThumbnailEditor from "./ThumbnailEditor";
 import Image from "next/image";
+import Steps from "../demo/Steps";
 
 export default function ThumbnailTester() {
     const [thumbnailImage, setThumbnailImage] = useState<string | null>(null);
@@ -30,7 +31,7 @@ export default function ThumbnailTester() {
         uploadTime: "2 hours ago"
     });
 
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
             const reader = new FileReader();
@@ -123,7 +124,7 @@ export default function ThumbnailTester() {
         return (
             <div className="relative">
                 <div 
-                    className="overflow-hidden bg-white dark:bg-gray-800 rounded-lg"
+                    className="bg-white dark:bg-gray-800 rounded-lg"
                     style={{
                         width: dimensions.width,
                         height: dimensions.height,
@@ -166,16 +167,10 @@ export default function ThumbnailTester() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-24 px-4">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-center mb-2">Thumbnail Tester</h1>
-                    <p className="text-center text-gray-600 dark:text-gray-400">
-                        Preview your thumbnails across different social platforms and devices
-                    </p>
-                </div>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+                <Steps />
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Left Column - Controls */}
                     <div className="space-y-6">
                         {/* Platform Selection */}
@@ -275,31 +270,32 @@ export default function ThumbnailTester() {
                             <CardContent>
                                 {/* Device Selection */}
                                 <div className="mb-6">
-                                <Tabs 
-                                    value={selectedDevice}
-                                    onValueChange={(value) => setSelectedDevice(value as Device)}
-                                    className="w-full"
-                                >
-                                    <TabsList className="grid grid-cols-3 w-full dark:bg-slate-800/50">
-                                    <TabsTrigger value="desktop" className="flex items-center gap-2">
-                                        <Monitor className="h-4 w-4" />
-                                        Desktop
-                                    </TabsTrigger>
-                                    <TabsTrigger value="mobile" className="flex items-center gap-2">
-                                        <Smartphone className="h-4 w-4" />
-                                        Mobile
-                                    </TabsTrigger>
-                                    <TabsTrigger value="tablet" className="flex items-center gap-2">
-                                        <Tablet className="h-4 w-4" />
-                                        Tablet
-                                    </TabsTrigger>
-                                    </TabsList>
-                                </Tabs>
+                                    <Tabs 
+                                        value={selectedDevice}
+                                        onValueChange={(value) => setSelectedDevice(value as Device)}
+                                        className="w-full"
+                                    >
+                                        <TabsList className="grid grid-cols-3 w-full dark:bg-slate-800/50">
+                                            <TabsTrigger value="desktop" className="flex items-center gap-2">
+                                                <Monitor className="h-4 w-4" />
+                                                Desktop
+                                            </TabsTrigger>
+                                            
+                                            <TabsTrigger value="tablet" className="flex items-center gap-2">
+                                                <Tablet className="h-4 w-4" />
+                                                Tablet
+                                            </TabsTrigger>
+                                            <TabsTrigger value="mobile" className="flex items-center gap-2">
+                                                <Smartphone className="h-4 w-4" />
+                                                Mobile
+                                            </TabsTrigger>
+                                        </TabsList>
+                                    </Tabs>
                                 </div>
 
                                 {/* Preview Area with Fixed Dimensions */}
                                 <div className="overflow-y-auto border rounded-lg p-4 bg-white dark:bg-gray-800">
-                                {renderPreview()}
+                                    {renderPreview()}
                                 </div>
                             </CardContent>
                         </Card>
@@ -316,7 +312,6 @@ export default function ThumbnailTester() {
                         />
                     )}
                 </div>
-            </div>
         </div>
     );
 }

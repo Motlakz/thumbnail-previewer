@@ -3,11 +3,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Repeat2, Share, MoreHorizontal, Bookmark } from "lucide-react";
+import { Heart, MessageCircle, Repeat2, Share, MoreHorizontal, Bookmark, ImageIcon } from "lucide-react";
 import { IoStatsChartSharp } from "react-icons/io5";
 import { ThumbnailMetadata, Device } from "@/types/platforms";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 interface TwitterPreviewProps {
     thumbnailImage: string | null;
@@ -16,9 +17,9 @@ interface TwitterPreviewProps {
 }
 
 interface EngagementButtonProps {
-    icon: React.ReactNode;
+    icon: ReactNode;
     count?: string;
-    color?: 'blue' | 'green' | 'red' | 'default'; // Define specific color options
+    color?: 'blue' | 'green' | 'red' | 'default';
 }
 
 const EngagementButton = ({ icon, count, color = 'default' }: EngagementButtonProps) => {
@@ -93,7 +94,7 @@ export default function TwitterPreview({ thumbnailImage, metadata, device }: Twi
                         </p>
 
                         {/* Image */}
-                        {thumbnailImage && (
+                        {thumbnailImage ? (
                             <div className="rounded-xl overflow-hidden border border-border">
                                 <Image
                                     src={thumbnailImage}
@@ -102,6 +103,11 @@ export default function TwitterPreview({ thumbnailImage, metadata, device }: Twi
                                     height={400}
                                     width={800}
                                 />
+                            </div>
+                        ) : (
+                            <div className="relative w-full h-64 rounded-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
+                                <ImageIcon className="w-8 h-8 md:w-12 md:h-12 mx-auto mb-2" />
+                                <span className="text-gray-400">Upload Thumbnail</span>
                             </div>
                         )}
 

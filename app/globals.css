@@ -74,7 +74,3 @@ body {
 .highlight-mini {
   text-shadow: 1px 1px 1px #000;
 }
-
-.dark .highlight-mini {
-  text-shadow: 1px 1px 1px #fff;
-}

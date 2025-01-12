@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { getCurrentUser } from "@/lib/appwrite";
 import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import { Loader } from "lucide-react";
 const DashboardLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);

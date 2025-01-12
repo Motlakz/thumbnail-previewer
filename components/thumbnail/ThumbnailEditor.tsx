@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, MouseEvent } from 'react'
 import { 
     Crop, 
     Rotate3D, 
@@ -255,7 +255,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
         setShowCropOverlay(true);
     };
 
-    const handleCropMouseDown = (e: React.MouseEvent<HTMLDivElement>, handle: string | null = null) => {
+    const handleCropMouseDown = (e: MouseEvent<HTMLDivElement>, handle: string | null = null) => {
       e.preventDefault();
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -273,7 +273,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
       });
     };
   
-    const handleCropMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleCropMouseMove = (e: MouseEvent<HTMLDivElement>) => {
       e.preventDefault();
       const canvas = canvasRef.current;
       if (!dragState.isDragging || !canvas || !dragState.originalCrop) return;

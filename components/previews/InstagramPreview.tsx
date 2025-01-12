@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Bookmark, Send, Smile } from "lucide-react";
+import { Heart, MessageCircle, Bookmark, Send, Smile, ImageIcon } from "lucide-react";
 import { ThumbnailMetadata, Device } from "@/types/platforms";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -52,7 +52,7 @@ export default function InstagramPreview({ thumbnailImage, metadata, device }: I
             </CardHeader>
 
             {/* Image */}
-            {thumbnailImage && (
+            {thumbnailImage ? (
                 <div className="relative aspect-square">
                     <Image
                         src={thumbnailImage}
@@ -61,6 +61,11 @@ export default function InstagramPreview({ thumbnailImage, metadata, device }: I
                         width={640}
                         height={640}
                     />
+                </div>
+            ) : (
+                <div className="relative w-full h-64 rounded-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
+                    <ImageIcon className="w-8 h-8 md:w-12 md:h-12 mx-auto mb-2" />
+                    <span className="text-gray-400">Upload Thumbnail</span>
                 </div>
             )}
 

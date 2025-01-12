@@ -2,28 +2,25 @@
 "use client";
 
 import { motion, useAnimation, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { 
   Image as ImageIcon, 
   Video, 
   Youtube, 
-  Instagram, 
-  Twitter, 
-  Facebook,
-  Eye,
-  Layout,
+  Layout, 
   Share2,
-  LucideIcon,
+  Eye,
+  Wand2,
   PlayCircle,
-  FileImage,
-  FileText,
-  Wand2
+  LucideIcon
 } from "lucide-react";
 import Link from "next/link";
-import ThumbnailTester from "@/components/thumbnail/ThumbnailTester";
+import { Demo } from "@/components/demo/PreviewDemo";
+import VideoDemo from "@/components/demo/VideoDemo";
+import Features from "@/components/Features";
 
 interface FloatingIconProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface IconData {
@@ -31,7 +28,7 @@ interface IconData {
   IconComponent: LucideIcon;
 }
 
-const FloatingIcon: React.FC<FloatingIconProps> = ({ children }) => {
+function FloatingIcon({ children }: FloatingIconProps) {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -64,7 +61,7 @@ const FloatingIcon: React.FC<FloatingIconProps> = ({ children }) => {
         y: Math.random() * window.innerHeight,
         opacity: 0.3
       }}
-      className="absolute pointer-events-none text-pink-500 dark:text-cyan-400"
+      className="absolute pointer-events-none text-pink-300 dark:text-cyan-400"
     >
       <div className="w-16 h-16 flex items-center justify-center">
         {children}
@@ -75,6 +72,7 @@ const FloatingIcon: React.FC<FloatingIconProps> = ({ children }) => {
 
 export default function Home() {
   const [icons, setIcons] = useState<IconData[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const iconComponents = [
     ImageIcon, Video, Youtube,
@@ -89,7 +87,6 @@ export default function Home() {
     setIcons(newIcons);
   }, []);
 
-  // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -111,38 +108,22 @@ export default function Home() {
       }
     }
   };
-  
-  const featureVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5 }
-    },
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.3 }
-    }
-  };
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-pink-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black">
-      {/* Floating background icons */}
       {icons.map((icon) => (
         <FloatingIcon key={icon.id}>
           <icon.IconComponent size={32} />
         </FloatingIcon>
       ))}
   
-      {/* Main content */}
-      <div className="relative container mx-auto z-10 sm:my-24 my-16 bg-black/10 p-16 rounded-3xl shadow-xl">
+      <div className="relative container mx-auto z-10 sm:my-24 my-16 bg-black/10 p-8 rounded-3xl shadow-xl">
         <motion.main
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="flex flex-col items-center text-center space-y-12"
         >
-          {/* Hero Section */}
           <motion.div 
             variants={itemVariants}
             className="flex items-center gap-4 mb-8"
@@ -160,7 +141,6 @@ export default function Home() {
             Test your thumbnails across multiple platforms before publishing. Perfect for YouTube creators, social media managers, and digital content makers.
           </motion.p>
   
-          {/* CTA Buttons */}
           <motion.div 
             variants={containerVariants}
             className="flex gap-6 flex-col sm:flex-row"
@@ -170,7 +150,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="group px-8 py-4 bg-pink-500 dark:bg-cyan-500 text-white rounded-full font-bold hover:bg-pink-600 dark:hover:bg-cyan-400 transition-all shadow-lg"
             >
-              <Link href="/dashboard" className="flex items-center gap-3 ">
+              <Link href="/dashboard" className="highlight-mini flex items-center gap-3">
                 Preview Your Thumbnail
                 <motion.div whileHover={{ rotate: 12 }}>
                   <Eye className="w-5 h-5" />
@@ -180,6 +160,7 @@ export default function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsModalOpen(true)}
               className="group px-8 py-4 bg-white/10 border-2 border-pink-500 dark:border-cyan-400 text-pink-500 dark:text-cyan-400 rounded-full font-bold flex items-center gap-3 hover:bg-pink-50 dark:hover:bg-cyan-950/20 transition-all"
             >
               How It Works
@@ -189,75 +170,35 @@ export default function Home() {
             </motion.button>
           </motion.div>
 
-          {/* Thumbnail Previewer */}
-          <ThumbnailTester />
-  
-          {/* Features Grid */}
-          <motion.div 
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
-          >
-            {[
-              {
-                icon: <Youtube className="w-8 h-8" />,
-                title: "YouTube Preview",
-                description: "Test how your thumbnails appear in search results, suggested videos, and channel pages"
-              },
-              {
-                icon: <Layout className="w-8 h-8" />,
-                title: "Multi-Platform Testing",
-                description: "Preview thumbnails across different devices and social media platforms"
-              },
-              {
-                icon: <FileImage className="w-8 h-8" />,
-                title: "File Support",
-                description: "Support for images, PDFs, and various thumbnail formats with instant preview"
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={featureVariants}
-                whileHover="hover"
-                className="bg-pink-50/50 dark:bg-black/50 backdrop-blur-sm p-8 rounded-xl hover:bg-pink-100/50 dark:hover:bg-cyan-900/20 transition-colors shadow-lg"
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className="mb-6 text-pink-500 dark:text-cyan-400"
-                >
-                  {feature.icon}
-                </motion.div>
-                <h3 className="text-xl font-bold mb-3 text-pink-900 dark:text-cyan-50">
-                  {feature.title}
-                </h3>
-                <p className="text-pink-700 dark:text-cyan-200">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-  
-          {/* Platform Support */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-8 bg-pink-50/50 dark:bg-black/50 backdrop-blur-sm p-10 rounded-2xl max-w-4xl w-full shadow-lg"
-          >
-            <h3 className="text-2xl font-bold mb-8 text-pink-900 dark:text-cyan-50">
-              Preview Across All Major Platforms
-            </h3>
-            <div className="flex justify-center gap-12 flex-wrap">
-              {[Youtube, Instagram, Twitter, Facebook, FileText].map((Icon, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.2, opacity: 1 }}
-                  className="text-pink-500 dark:text-cyan-400 opacity-50 hover:opacity-100 transition-opacity"
-                >
-                  <Icon className="w-10 h-10" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <Demo />
+          <Features />
         </motion.main>
       </div>
+
+      <VideoDemo isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="space-y-6 text-gray-700 dark:text-gray-200">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">1. Upload Your Thumbnail</h3>
+            <p>Simply drag and drop your thumbnail image or click to upload. We support various image formats including JPG, PNG, and WebP.</p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">2. Preview Across Platforms</h3>
+            <p>See how your thumbnail appears across different platforms including YouTube, Instagram, Twitter, and Facebook.</p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">3. Optimize and Adjust</h3>
+            <p>Make informed decisions about your thumbnail based on how it appears in different contexts and sizes.</p>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Start previewing your thumbnails now to ensure they look perfect across all platforms!
+            </p>
+          </div>
+        </div>
+      </VideoDemo>
     </div>
   );
 }

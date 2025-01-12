@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, MessageSquare } from "lucide-react";
+import { ImageIcon, MessageCircle, MessageSquare } from "lucide-react";
 import { ThumbnailMetadata, Device } from "@/types/platforms";
 import { IoLogoWhatsapp, IoClose } from "react-icons/io5";
 import { FaGlobeAmericas, FaShare } from "react-icons/fa";
@@ -63,10 +63,8 @@ export default function FacebookPreview({ thumbnailImage, metadata, device }: Fa
             </CardHeader>
 
             <CardContent className="p-4 pt-0 space-y-4">
-                {/* Post Text */}
                 <p className="text-md text-left">{metadata.title}</p>
 
-                {/* Thumbnail Image */}
                 {thumbnailImage ? (
                     <div className="relative w-full rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
                         <Image
@@ -78,12 +76,12 @@ export default function FacebookPreview({ thumbnailImage, metadata, device }: Fa
                         />
                     </div>
                 ) : (
-                    <div className="relative w-full h-64 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    <div className="relative w-full h-64 rounded-xl bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center">
+                        <ImageIcon className="w-8 h-8 md:w-12 md:h-12 mx-auto mb-2" />
                         <span className="text-gray-400">No image uploaded</span>
                     </div>
                 )}
 
-                {/* Engagement Stats */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <div className="flex">
@@ -109,27 +107,25 @@ export default function FacebookPreview({ thumbnailImage, metadata, device }: Fa
                     </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex pt-3 justify-between border-t border-gray-700">
-                    <Button variant="ghost" size="sm" className="flex-1 text-gray-400">
-                        <AiOutlineLike className="h-4 w-4 mr-2" />
-                        Like
+                <div className="flex flex-wrap pt-3 justify-between border-t border-gray-700">
+                    <Button variant="ghost" size="sm" className="flex-1 min-w-[25%] text-gray-400 text-xs sm:text-sm">
+                        <AiOutlineLike className="h-4 w-4 flex-shrink-0" />
+                        <span className="whitespace-nowrap">Like</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="flex-1 text-gray-400">
-                        <MessageCircle className="h-4 w-4 mr-2" />
-                        Comment
+                    <Button variant="ghost" size="sm" className="flex-1 min-w-[25%] text-gray-400 text-xs sm:text-sm">
+                        <MessageCircle className="h-4 w-4 flex-shrink-0" />
+                        <span className="whitespace-nowrap">Comment</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="flex-1 text-gray-400">
-                        <IoLogoWhatsapp className="h-4 w-4 mr-2" />
-                        Send
+                    <Button variant="ghost" size="sm" className="flex-1 min-w-[25%] text-gray-400 text-xs sm:text-sm">
+                        <IoLogoWhatsapp className="h-4 w-4 flex-shrink-0" />
+                        <span className="whitespace-nowrap">Send</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="flex-1 text-gray-400">
-                        <FaShare className="h-4 w-4 mr-2" />
-                        Share
+                    <Button variant="ghost" size="sm" className="flex-1 min-w-[25%] text-gray-400 text-xs sm:text-sm">
+                        <FaShare className="h-4 w-4 flex-shrink-0" />
+                        <span className="whitespace-nowrap">Share</span>
                     </Button>
                 </div>
 
-                {/* Comments Section */}
                 <div className="space-y-4 pt-2 border-t border-gray-700">
                     {comments.map((comment, index) => (
                         <div key={index} className="flex gap-2">
