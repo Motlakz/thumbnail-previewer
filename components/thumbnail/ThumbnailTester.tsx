@@ -70,26 +70,24 @@ export default function ThumbnailTester() {
         if (isFullscreen) {
             return (
                 <div 
-                    className="fixed inset-0 z-50 bg-black/80"
+                    className="fixed inset-0 z-50 bg-black/80 overflow-hidden"
                     onClick={(e) => {
                         if (e.target === e.currentTarget) {
-                        setIsFullscreen(false);
+                            setIsFullscreen(false);
                         }
                     }}
                 >
-                    <div className="min-h-screen px-4 py-8 flex items-center justify-center">
-                        <div className="relative bg-white dark:bg-gray-800 rounded-lg p-8 max-w-[95vw] overflow-y-auto">
-                            {/* Close button */}
+                    <div className="h-screen w-full flex items-center justify-center p-4">
+                        <div className="relative bg-white dark:bg-slate-800 rounded-lg p-8 max-h-[95vh] w-auto">
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="absolute right-2 top-4 z-50"
+                                className="absolute right-2 top-4 z-50 dark:hover:bg-slate-900"
                                 onClick={() => setIsFullscreen(false)}
                             >
                                 <X className="h-4 w-4" />
                             </Button>
-
-                            {/* Platform and device info */}
+    
                             <div className="mb-4 text-center">
                                 <h3 className="text-lg font-medium mb-1">
                                     {selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)} - {selectedDevice.charAt(0).toUpperCase() + selectedDevice.slice(1)}
@@ -98,17 +96,22 @@ export default function ThumbnailTester() {
                                     {dimensions.width} × {dimensions.height}
                                 </p>
                             </div>
-
-                            {/* Scrollable preview container */}
-                            <div className="overflow-y-auto">
+    
+                            <div className="relative overflow-auto custom-scrollbar"
+                                 style={{
+                                     maxHeight: 'calc(95vh - 120px)',
+                                     maxWidth: '95vw',
+                                 }}
+                            >
                                 <div 
+                                    className="transform-gpu"
                                     style={{
                                         width: dimensions.width,
                                         height: dimensions.height,
                                         transform: `scale(${Math.min(
-                                            (window.innerWidth * 0.9) / dimensions.width,
-                                            (window.innerHeight * 0.8) / dimensions.height
-                                        )})`,
+                                            (window.innerWidth * 0.85) / dimensions.width,
+                                            (window.innerHeight * 0.75) / dimensions.height
+                                        ) * 1.25}`, // 1.25x zoom factor
                                         transformOrigin: 'top center',
                                     }}
                                 >
@@ -120,11 +123,11 @@ export default function ThumbnailTester() {
                 </div>
             );
         }
-
+    
         return (
             <div className="relative">
                 <div 
-                    className="bg-white dark:bg-gray-800 rounded-lg"
+                    className="bg-white dark:bg-slate-800 rounded-lg"
                     style={{
                         width: dimensions.width,
                         height: dimensions.height,
@@ -138,7 +141,7 @@ export default function ThumbnailTester() {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="absolute top-0 w-8 h-8"
+                    className="absolute top-0 left-0 w-8 h-8 dark:hover:bg-slate-900"
                     onClick={() => setIsFullscreen(true)}
                 >
                     <Maximize2 />
@@ -167,7 +170,7 @@ export default function ThumbnailTester() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4">
                 <Steps />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -220,7 +223,7 @@ export default function ThumbnailTester() {
                                                 variant="outline"
                                                 size="sm"
                                                 onClick={() => setShowImageEditor(true)}
-                                                className="mt-4 w-full"
+                                                className="mt-4 w-full dark:hover:bg-slate-800"
                                             >
                                                 Edit Image
                                             </Button>
@@ -294,7 +297,7 @@ export default function ThumbnailTester() {
                                 </div>
 
                                 {/* Preview Area with Fixed Dimensions */}
-                                <div className="overflow-y-auto border rounded-lg p-4 bg-white dark:bg-gray-800">
+                                <div className="overflow-y-auto border rounded-lg p-4 bg-white dark:bg-slate-800">
                                     {renderPreview()}
                                 </div>
                             </CardContent>

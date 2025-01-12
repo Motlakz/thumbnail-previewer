@@ -420,6 +420,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
               size="icon"
               onClick={undo}
               disabled={currentEditIndex <= 0}
+              className="dark:hover:bg-slate-700"
             >
               <Undo2 className="h-4 w-4" />
             </Button>
@@ -428,6 +429,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
               size="icon"
               onClick={redo}
               disabled={currentEditIndex >= editHistory.length - 1}
+              className="dark:hover:bg-slate-700"
             >
               <Redo2 className="h-4 w-4" />
             </Button>
@@ -435,11 +437,11 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
               variant="outline" 
               size="icon"
               onClick={resetEdits}
-              className="text-red-500"
+              className="text-red-500 dark:hover:bg-red-400"
             >
               <RotateCcw className="h-4 w-4" />
             </Button>
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" className="dark:hover:bg-slate-700" onClick={onClose}>
               <X className="h-4 w-4 mr-2" />
               Close
             </Button>
@@ -496,7 +498,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
 
           <div>
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="flex">
+              <TabsList className="flex dark:bg-slate-950/20">
                 <TabsTrigger value="adjust">
                   <SlidersHorizontal className="h-4 w-4 mr-2" />
                   Adjust
@@ -573,7 +575,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
                             <Button
                                 variant="outline"
                                 onClick={() => updateEditState({ flipX: !editState.flipX })}
-                                className={`${editState.flipX ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}`}
+                                className={`dark:hover:bg-slate-600 ${editState.flipX ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}`}
                             >
                                 <FlipHorizontal className="h-4 w-4 mr-2" />
                                 Flip X
@@ -581,7 +583,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
                             <Button
                                 variant="outline"
                                 onClick={() => updateEditState({ flipY: !editState.flipY })}
-                                className={`${editState.flipY ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}`}
+                                className={`dark:hover:bg-slate-600 ${editState.flipY ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}`}
                             >
                                 <FlipVertical className="h-4 w-4 mr-2" />
                                 Flip Y
@@ -589,7 +591,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
                             <Button
                                 variant="outline"
                                 onClick={initializeCrop}
-                                className={showCropOverlay ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}
+                                className={`dark:hover:bg-slate-600 ${showCropOverlay ? 'bg-slate-100 dark:bg-slate-700 border-slate-400 dark:border-slate-500' : ''}`}
                             >
                                 <Crop className="h-4 w-4 mr-2" />
                                 Crop
@@ -636,6 +638,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
                         variant="outline"
                         onClick={() => updateEditState({ backgroundColor: 'transparent' })}
                         size="sm"
+                        className="dark:hover:bg-slate-700"
                       >
                         Clear
                       </Button>
