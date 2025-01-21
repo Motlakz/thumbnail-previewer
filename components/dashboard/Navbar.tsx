@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Coffee } from "lucide-react";
 import Image from "next/image";
-import Logo from "../../public/cutesy_thumbnail_logo.png";
+import Logo from "/cutesy_thumbnail_logo.png";
 import { ModeToggle } from "./ModeToggle";
 
 export function Navbar() {

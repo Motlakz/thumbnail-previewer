@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { useTheme } from "next-themes"
-import DarkApp from "../../public/demo/dark/DarkDemoPic.png"
-import LightApp from "../../public/demo/light/LightDemoPic.png"
+import DarkApp from "/demo/dark/DarkDemoPic.png"
+import LightApp from "/demo/light/LightDemoPic.png"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 
