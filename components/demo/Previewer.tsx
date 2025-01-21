@@ -11,18 +11,19 @@ import { Device, PREVIEW_DIMENSIONS, ThumbnailMetadata } from "@/types/platforms
 import YouTubePreview from "../previews/YouTubePreview";
 import Image from "next/image";
 
+const DEFAULT_METADATA: ThumbnailMetadata = {
+    title: "How I Built This Amazing Feature in Just 1 Hour!",
+    channelName: "TechMaster Pro",
+    subscribers: "1.2M subscribers",
+    views: "254K views",
+    uploadTime: "2 hours ago"
+};
+
 export default function DemoPreviewer() {
     const [thumbnailImage, setThumbnailImage] = useState<string | null>(null);
     const [selectedDevice, setSelectedDevice] = useState<Device>("desktop");
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [metadata, setMetadata] = useState<ThumbnailMetadata>({
-        title: "How I Built This Amazing Feature in Just 1 Hour!",
-        channelName: "TechMaster Pro",
-        subscribers: "1.2M subscribers",
-        views: "254K views",
-        uploadTime: "2 hours ago"
-    });
-    const [isUpgraded, ] = useState(false); // Track if user is upgraded
+    const metadata = DEFAULT_METADATA;
 
     const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -33,14 +34,6 @@ export default function DemoPreviewer() {
             };
             reader.readAsDataURL(file);
         }
-    };
-
-    const handleMetadataChange = (field: string, value: string) => {
-        if (!isUpgraded) return; // Disable metadata editing for non-upgraded users
-        setMetadata(prev => ({
-            ...prev,
-            [field]: value
-        }));
     };
 
     useEffect(() => {
@@ -73,7 +66,7 @@ export default function DemoPreviewer() {
                     }}
                 >
                     <div className="h-screen w-full flex items-center justify-center p-4">
-                        <div className="relative bg-white dark:bg-slate-800 rounded-lg p-8 max-h-[95vh] w-auto">
+                        <div className="relative bg-white dark:bg-slate-800 rounded-lg p-8 mt-24 max-h-[95vh] w-auto">
                             <Button
                                 variant="outline"
                                 size="icon"
@@ -158,29 +151,10 @@ export default function DemoPreviewer() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4 rounded-md">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="min-h-screen max-w-7xl w-full bg-gray-50 dark:bg-slate-900 py-8 px-4 rounded-md">
+            <div className="flex flex-col gap-4">
                 {/* Left Column - Controls */}
                 <div className="space-y-6">
-                    {/* Platform Selection (Locked to YouTube) */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Platform</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Tabs value="youtube" className="w-full">
-                                <TabsList className="grid grid-cols-1 w-full dark:bg-slate-800/50">
-                                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
-                                </TabsList>
-                            </Tabs>
-                            {!isUpgraded && (
-                                <p className="text-sm text-gray-500 mt-2">
-                                    Sign up to unlock other platform previews.
-                                </p>
-                            )}
-                        </CardContent>
-                    </Card>
-
                     {/* Thumbnail Upload */}
                     <Card className="pb-12">
                         <CardHeader>
@@ -200,11 +174,9 @@ export default function DemoPreviewer() {
                                             width={800}
                                             height={400}
                                         />
-                                        {isUpgraded && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg">
-                                                <span className="text-white">Change Image</span>
-                                            </div>
-                                        )}
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg">
+                                            <span className="text-white">Change Image</span>
+                                        </div>
                                     </div>
                                 ) : (
                                     <>
@@ -221,51 +193,6 @@ export default function DemoPreviewer() {
                                 onChange={handleImageUpload}
                                 className="hidden"
                             />
-                            {!isUpgraded && thumbnailImage && (
-                                <Button
-                                    variant="default"
-                                    className="mt-4 w-full"
-                                    onClick={() => alert("Please sign up and upgrade to edit the image.")}
-                                >
-                                    Sign up to Edit Image
-                                </Button>
-                            )}
-                        </CardContent>
-                    </Card>
-
-                    {/* Metadata Form */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Post Details</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="space-y-4">
-                                <div>
-                                    <Label>Title</Label>
-                                    <Input
-                                        value={metadata.title}
-                                        onChange={(e) => handleMetadataChange("title", e.target.value)}
-                                        disabled={!isUpgraded}
-                                    />
-                                </div>
-                                <div>
-                                    <Label>Channel Name</Label>
-                                    <Input
-                                        value={metadata.channelName}
-                                        onChange={(e) => handleMetadataChange("channelName", e.target.value)}
-                                        disabled={!isUpgraded}
-                                    />
-                                </div>
-                                {!isUpgraded && (
-                                    <Button
-                                        variant="default"
-                                        className="w-full"
-                                        onClick={() => alert("Please sign up and upgrade to edit metadata.")}
-                                    >
-                                        Sign up to Edit Metadata
-                                    </Button>
-                                )}
-                            </div>
                         </CardContent>
                     </Card>
                 </div>

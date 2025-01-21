@@ -257,7 +257,7 @@ const Features = () => {
               whileTap={{ scale: 0.95 }}
               className="text-pink-500 dark:text-cyan-400"
             >
-              <Link href="/register" className="flex items-center gap-2">Preview your thumbnails now <ArrowRight className="w-4 h-4" /></Link>
+              <Link href="/" className="flex items-center gap-2">Preview your thumbnails now <ArrowRight className="w-4 h-4" /></Link>
             </motion.button>
           }
         />
