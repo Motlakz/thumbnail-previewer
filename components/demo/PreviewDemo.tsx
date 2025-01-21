@@ -18,7 +18,7 @@ export function Demo() {
     })
 
     const rotateX = useTransform(scrollYProgress, [0,1], [14,-10])
-    const opacity = useTransform(scrollYProgress, [0,1], [0, 2])
+    const opacity = useTransform(scrollYProgress, [0,1], [0, 4])
 
     // Handle mounting for theme
     useEffect(() => {
@@ -32,7 +32,7 @@ export function Demo() {
     const currentImage = theme === 'dark' ? DarkApp : LightApp
 
     return (
-        <div className="text-foreground py-20 sm:py-24">
+        <div className="w-screen flex items-center justify-center text-foreground">
             <motion.div
                 ref={appImageRef}
                 style={{
@@ -40,12 +40,12 @@ export function Demo() {
                     rotateX: rotateX,
                     transformPerspective: "700px"
                 }}
-                className="mt-14 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/10 border border-foreground/10"
+                className="rounded-xl overflow-hidden shadow-2xl border border-foreground/10 w-full h-full max-w-[90vw] max-h-[90vh]"
             >
                 <Image
                     src={currentImage}
                     alt="App demo interface"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                     priority
                 />
             </motion.div>

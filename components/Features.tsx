@@ -15,6 +15,7 @@ import {
   Eye,
 } from "lucide-react";
 import { Children, ReactNode } from "react";
+import Link from "next/link";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -219,6 +220,8 @@ const Features = () => {
               <Upload className="w-6 h-6 text-pink-500 dark:text-cyan-400" />
               <Youtube className="w-6 h-6 text-pink-500 dark:text-cyan-400" />
               <Instagram className="w-6 h-6 text-pink-500 dark:text-cyan-400" />
+              <Facebook className="w-6 h-6 text-pink-500 dark:text-cyan-400" />
+              <Twitter className="w-6 h-6 text-pink-500 dark:text-cyan-400" />
             </div>
           }
         />
@@ -252,9 +255,9 @@ const Features = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-pink-500 dark:text-cyan-400"
+              className="text-pink-500 dark:text-cyan-400"
             >
-              Preview your thumbnails now <ArrowRight className="w-4 h-4" />
+              <Link href="/register" className="flex items-center gap-2">Preview your thumbnails now <ArrowRight className="w-4 h-4" /></Link>
             </motion.button>
           }
         />

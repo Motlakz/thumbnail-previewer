@@ -15,9 +15,9 @@ import {
   LucideIcon
 } from "lucide-react";
 import Link from "next/link";
-import { Demo } from "@/components/demo/PreviewDemo";
 import VideoDemo from "@/components/demo/VideoDemo";
 import Features from "@/components/Features";
+import DemoPreviewer from "@/components/demo/Previewer";
 
 interface FloatingIconProps {
   children: ReactNode;
@@ -170,7 +170,7 @@ export default function Home() {
             </motion.button>
           </motion.div>
 
-          <Demo />
+          <DemoPreviewer />
           <Features />
         </motion.main>
       </div>

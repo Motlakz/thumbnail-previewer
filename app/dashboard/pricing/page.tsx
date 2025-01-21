@@ -22,13 +22,13 @@ const PricingPage = () => {
                 return {
                     gradient: "from-pink-500 to-pink-600",
                     darkGradient: "dark:from-cyan-400 dark:to-cyan-500",
-                    isPopular: true
+                    isPopular: false
                 };
             case PlanId.PRO:
                 return {
                     gradient: "from-pink-600 to-pink-700",
                     darkGradient: "dark:from-cyan-300 dark:to-cyan-400",
-                    isPopular: false
+                    isPopular: true
                 };
         }
     };

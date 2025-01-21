@@ -33,7 +33,7 @@ const deviceConfigs = {
         },
         searchView: {
             layout: "flex-col md:flex-row",
-            thumbnailWidth: "w-full md:w-[360px] xl:w-[480px]",
+            thumbnailWidth: "w-full md:w-[375px] xl:w-[480px]",
             contentLayout: "flex flex-col gap-1 xl:gap-3"
         },
         suggestedView: {
@@ -71,7 +71,7 @@ const deviceConfigs = {
         }
     },
     mobile: {
-        contentWidth: "w-full max-w-[360px]",
+        contentWidth: "w-full max-w-[375px]",
         thumbnailSize: "aspect-video",
         gridLayout: "grid-cols-1",
         textSize: {
@@ -109,7 +109,7 @@ export default function YouTubePreview({ thumbnailImage, metadata, device }: You
                     alt="Thumbnail preview"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 360px) 100vw, (max-width: 768px) 768px, 1280px"
+                    sizes="(max-width: 375px) 100vw, (max-width: 768px) 768px, 1280px"
                     priority
                 />
             ) : (
@@ -146,10 +146,10 @@ export default function YouTubePreview({ thumbnailImage, metadata, device }: You
                                 </div>
                             </div>
                             <div className={config.defaultView.infoLayout}>
-                                <h3 className={`${config.textSize.title} font-semibold line-clamp-2 dark:text-white`}>
+                                <h3 className={`${config.textSize.title} font-semibold text-left line-clamp-2 dark:text-white`}>
                                     {metadata.title}
                                 </h3>
-                                <p className={`${config.textSize.body} text-muted-foreground line-clamp-1`}>
+                                <p className={`${config.textSize.body} text-muted-foreground text-left line-clamp-1`}>
                                     {metadata.channelName}
                                 </p>
                                 <MetadataDisplay />
@@ -166,7 +166,7 @@ export default function YouTubePreview({ thumbnailImage, metadata, device }: You
                             {renderThumbnail()}
                         </div>
                         <div className={config.searchView.contentLayout}>
-                            <h3 className={`${config.textSize.title} font-semibold line-clamp-2 dark:text-white`}>
+                            <h3 className={`${config.textSize.title} font-semibold text-left line-clamp-2 dark:text-white`}>
                                 {metadata.title}
                             </h3>
                             <MetadataDisplay />
@@ -195,10 +195,10 @@ export default function YouTubePreview({ thumbnailImage, metadata, device }: You
                             {renderThumbnail()}
                         </div>
                         <div className="flex-1 ml-2 min-w-0">
-                            <h3 className={`${config.textSize.subtitle} font-medium line-clamp-2 mb-1 dark:text-white`}>
+                            <h3 className={`${config.textSize.subtitle} font-medium text-left line-clamp-2 mb-1 dark:text-white`}>
                                 {metadata.title}
                             </h3>
-                            <p className={`${config.textSize.body} text-muted-foreground line-clamp-1`}>
+                            <p className={`${config.textSize.body} text-muted-foreground text-left line-clamp-1`}>
                                 {metadata.channelName}
                             </p>
                             <MetadataDisplay />
@@ -212,7 +212,7 @@ export default function YouTubePreview({ thumbnailImage, metadata, device }: You
                     <motion.div className="space-y-2 md:space-y-3">
                         {renderThumbnail()}
                         <div className="space-y-1 md:space-y-1.5">
-                            <h3 className={`${config.textSize.subtitle} font-medium line-clamp-2 dark:text-white`}>
+                            <h3 className={`${config.textSize.subtitle} font-medium text-left line-clamp-2 dark:text-white`}>
                                 {metadata.title}
                             </h3>
                             <MetadataDisplay />
