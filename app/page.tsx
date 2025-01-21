@@ -146,7 +146,7 @@ export default function Home() {
             variants={containerVariants}
             className="flex gap-6 flex-col sm:flex-row"
           >
-            {/* <motion.button
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group px-8 py-4 bg-pink-500 dark:bg-cyan-500 text-white rounded-full font-bold hover:bg-pink-600 dark:hover:bg-cyan-400 transition-all shadow-lg"
@@ -157,7 +157,7 @@ export default function Home() {
                   <Eye className="w-5 h-5" />
                 </motion.div>
               </Link>
-            </motion.button> */}
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
