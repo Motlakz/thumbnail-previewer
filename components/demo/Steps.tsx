@@ -6,16 +6,16 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
 // Light mode images
-import LightStep1 from '/demo/light/LightStep1.png';
-import LightStep2 from '/demo/light/LightStep2.png';
-import LightStep3 from '/demo/light/LightStep3.png';
-import LightStep4 from '/demo/light/LightStep4.png';
+import LightStep1 from '@/public/demo/light/LightStep1.png';
+import LightStep2 from '@/public/demo/light/LightStep2.png';
+import LightStep3 from '@/public/demo/light/LightStep3.png';
+import LightStep4 from '@/public/demo/light/LightStep4.png';
 
 // Dark mode images
-import DarkStep1 from '/demo/dark/Step1.png';
-import DarkStep2 from '/demo/dark/Step2.png';
-import DarkStep3 from '/demo/dark/Step3.png';
-import DarkStep4 from '/demo/dark/Step4.png';
+import DarkStep1 from '@/public/demo/dark/Step1.png';
+import DarkStep2 from '@/public/demo/dark/Step2.png';
+import DarkStep3 from '@/public/demo/dark/Step3.png';
+import DarkStep4 from '@/public/demo/dark/Step4.png';
 import { useEffect, useState } from 'react';
 
 const StepsArray = [
