@@ -120,7 +120,7 @@ export default function DemoPreviewer() {
                         width: dimensions.width,
                         height: dimensions.height,
                         transform: 'scale(0.5)',
-                        transformOrigin: 'top left',
+                        transformOrigin: 'top center',
                         margin: 'auto'
                     }}
                 >
