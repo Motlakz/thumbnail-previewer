@@ -158,160 +158,156 @@ export default function DemoPreviewer() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4 rounded-md">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Left Column - Controls */}
-                <div className="space-y-6">
-                    {/* Platform Selection (Locked to YouTube) */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Platform</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Tabs value="youtube" className="w-full">
-                                <TabsList className="grid grid-cols-1 w-full dark:bg-slate-800/50">
-                                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
-                                </TabsList>
-                            </Tabs>
-                            {!isUpgraded && (
-                                <p className="text-sm text-gray-500 mt-2">
-                                    Sign up to unlock other platform previews.
-                                </p>
-                            )}
-                        </CardContent>
-                    </Card>
+        <div className="min-h-screen max-w-7xl w-full bg-gray-50 dark:bg-slate-900 py-8 px-4 rounded-md">
+            {/* Platform Selection at the Top */}
+            <Card className="mb-6">
+                <CardHeader>
+                    <CardTitle>Platform</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <Tabs value="youtube" className="w-full">
+                        <TabsList className="grid grid-cols-1 w-full dark:bg-slate-800/50">
+                            <TabsTrigger value="youtube">YouTube</TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                    {!isUpgraded && (
+                        <p className="text-sm text-gray-500 mt-2">
+                            Sign up to unlock other platform previews.
+                        </p>
+                    )}
+                </CardContent>
+            </Card>
 
-                    {/* Thumbnail Upload */}
-                    <Card className="pb-12">
-                        <CardHeader>
-                            <CardTitle>Upload Thumbnail</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <Label 
-                                htmlFor="thumbnail-upload"
-                                className="w-full h-40 flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            {/* Left and Right Columns */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Left Column - Upload Image */}
+                <Card className="pb-12">
+                    <CardHeader>
+                        <CardTitle>Upload Thumbnail</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Label 
+                            htmlFor="thumbnail-upload"
+                            className="w-full h-40 flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        >
+                            {thumbnailImage ? (
+                                <div className="relative w-full h-full">
+                                    <Image 
+                                        src={thumbnailImage} 
+                                        alt="Thumbnail preview" 
+                                        className="w-full h-full object-contain rounded-lg"
+                                        width={800}
+                                        height={400}
+                                    />
+                                    {isUpgraded && (
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg">
+                                            <span className="text-white">Change Image</span>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <>
+                                    <Upload className="h-10 w-10 text-gray-400 mb-2" />
+                                    <span className="text-sm text-gray-500">Click to upload thumbnail image</span>
+                                    <span className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</span>
+                                </>
+                            )}
+                        </Label>
+                        <Input
+                            id="thumbnail-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                        />
+                        {!isUpgraded && thumbnailImage && (
+                            <Button
+                                variant="default"
+                                className="mt-4 w-full"
+                                onClick={() => alert("Please sign up and upgrade to edit the image.")}
                             >
-                                {thumbnailImage ? (
-                                    <div className="relative w-full h-full">
-                                        <Image 
-                                            src={thumbnailImage} 
-                                            alt="Thumbnail preview" 
-                                            className="w-full h-full object-contain rounded-lg"
-                                            width={800}
-                                            height={400}
-                                        />
-                                        {isUpgraded && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg">
-                                                <span className="text-white">Change Image</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <>
-                                        <Upload className="h-10 w-10 text-gray-400 mb-2" />
-                                        <span className="text-sm text-gray-500">Click to upload thumbnail image</span>
-                                        <span className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</span>
-                                    </>
-                                )}
-                            </Label>
-                            <Input
-                                id="thumbnail-upload"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                className="hidden"
-                            />
-                            {!isUpgraded && thumbnailImage && (
+                                Sign up to Edit Image
+                            </Button>
+                        )}
+                    </CardContent>
+                </Card>
+
+                {/* Right Column - Post Details */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Post Details</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="space-y-4">
+                            <div>
+                                <Label>Title</Label>
+                                <Input
+                                    value={metadata.title}
+                                    onChange={(e) => handleMetadataChange("title", e.target.value)}
+                                    disabled={!isUpgraded}
+                                />
+                            </div>
+                            <div>
+                                <Label>Channel Name</Label>
+                                <Input
+                                    value={metadata.channelName}
+                                    onChange={(e) => handleMetadataChange("channelName", e.target.value)}
+                                    disabled={!isUpgraded}
+                                />
+                            </div>
+                            {!isUpgraded && (
                                 <Button
                                     variant="default"
-                                    className="mt-4 w-full"
-                                    onClick={() => alert("Please sign up and upgrade to edit the image.")}
+                                    className="w-full"
+                                    onClick={() => alert("Please sign up and upgrade to edit metadata.")}
                                 >
-                                    Sign up to Edit Image
+                                    Sign up to Edit Metadata
                                 </Button>
                             )}
-                        </CardContent>
-                    </Card>
-
-                    {/* Metadata Form */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Post Details</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="space-y-4">
-                                <div>
-                                    <Label>Title</Label>
-                                    <Input
-                                        value={metadata.title}
-                                        onChange={(e) => handleMetadataChange("title", e.target.value)}
-                                        disabled={!isUpgraded}
-                                    />
-                                </div>
-                                <div>
-                                    <Label>Channel Name</Label>
-                                    <Input
-                                        value={metadata.channelName}
-                                        onChange={(e) => handleMetadataChange("channelName", e.target.value)}
-                                        disabled={!isUpgraded}
-                                    />
-                                </div>
-                                {!isUpgraded && (
-                                    <Button
-                                        variant="default"
-                                        className="w-full"
-                                        onClick={() => alert("Please sign up and upgrade to edit metadata.")}
-                                    >
-                                        Sign up to Edit Metadata
-                                    </Button>
-                                )}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
-
-                {/* Right Column - Preview */}
-                <div className="space-y-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Preview</CardTitle>
-                            <p className="text-sm text-gray-500">
-                                Viewing at {PREVIEW_DIMENSIONS["youtube"][selectedDevice].width} x {PREVIEW_DIMENSIONS["youtube"][selectedDevice].height}
-                            </p>
-                        </CardHeader>
-                        <CardContent>
-                            {/* Device Selection */}
-                            <div className="mb-6">
-                                <Tabs 
-                                    value={selectedDevice}
-                                    onValueChange={(value) => setSelectedDevice(value as Device)}
-                                    className="w-full"
-                                >
-                                    <TabsList className="grid grid-cols-3 w-full dark:bg-slate-800/50">
-                                        <TabsTrigger value="desktop" className="flex items-center gap-2">
-                                            <Monitor className="h-4 w-4" />
-                                            Desktop
-                                        </TabsTrigger>
-                                        <TabsTrigger value="tablet" className="flex items-center gap-2">
-                                            <Tablet className="h-4 w-4" />
-                                            Tablet
-                                        </TabsTrigger>
-                                        <TabsTrigger value="mobile" className="flex items-center gap-2">
-                                            <Smartphone className="h-4 w-4" />
-                                            Mobile
-                                        </TabsTrigger>
-                                    </TabsList>
-                                </Tabs>
-                            </div>
-
-                            {/* Preview Area with Fixed Dimensions */}
-                            <div className="overflow-y-auto border rounded-lg p-4 bg-white dark:bg-slate-800">
-                                {renderPreview()}
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
+
+            {/* Preview at the Bottom */}
+            <Card className="mt-6">
+                <CardHeader>
+                    <CardTitle>Preview</CardTitle>
+                    <p className="text-sm text-gray-500">
+                        Viewing at {PREVIEW_DIMENSIONS["youtube"][selectedDevice].width} x {PREVIEW_DIMENSIONS["youtube"][selectedDevice].height}
+                    </p>
+                </CardHeader>
+                <CardContent>
+                    {/* Device Selection */}
+                    <div className="mb-6">
+                        <Tabs 
+                            value={selectedDevice}
+                            onValueChange={(value) => setSelectedDevice(value as Device)}
+                            className="w-full"
+                        >
+                            <TabsList className="grid grid-cols-3 w-full dark:bg-slate-800/50">
+                                <TabsTrigger value="desktop" className="flex items-center gap-2">
+                                    <Monitor className="h-4 w-4" />
+                                    Desktop
+                                </TabsTrigger>
+                                <TabsTrigger value="tablet" className="flex items-center gap-2">
+                                    <Tablet className="h-4 w-4" />
+                                    Tablet
+                                </TabsTrigger>
+                                <TabsTrigger value="mobile" className="flex items-center gap-2">
+                                    <Smartphone className="h-4 w-4" />
+                                    Mobile
+                                </TabsTrigger>
+                            </TabsList>
+                        </Tabs>
+                    </div>
+
+                    {/* Preview Area with Fixed Dimensions */}
+                    <div className="overflow-y-auto border rounded-lg p-4 bg-white dark:bg-slate-800">
+                        {renderPreview()}
+                    </div>
+                </CardContent>
+            </Card>
         </div>
     );
 }

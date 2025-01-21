@@ -1,64 +1,91 @@
-"use client"
+"use client";
 
-import { useState, useEffect, ReactNode } from "react";
-import { getCurrentUser } from "@/lib/appwrite";
-import { User } from "@/types/user";
+import { ModeToggle } from "@/components/dashboard/ModeToggle";
+import { gradientButtonClass } from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import { account } from "@/lib/appwrite";
+import { Edit2, LogOut, Settings2, Star, User } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Loader } from "lucide-react";
+import { ReactNode } from "react";
 
 const DashboardLayout = ({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) => {
-    const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                setIsLoading(true);
-                const currentUser = await getCurrentUser();
-                
-                if (!currentUser) {
-                    // Redirect to login if no user is found
-                    router.push('/login');
-                    return;
-                }
-                
-                setUser(currentUser);
-            } catch (error) {
-                console.error('Error fetching user:', error);
-                // Handle error appropriately
-                router.push('/login');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchUser();
-    }, [router]);
-
-    // Show loading state while checking authentication
-    if (isLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <Loader className="animate-spin" />
-            </div>
-        );
-    }
-
-    // If no user and not loading, don't render children
-    if (!user && !isLoading) {
-        return null; // Or redirect will handle it
-    }
-
+    const handleSignOut = async () => {
+        try {
+            await account.deleteSession('current');
+            router.push('/login');
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    };
+    
     return (
-        <main className="min-h-screen">
-            {children}
-        </main> 
-    );
-}
+        <div className="flex h-screen">
+            <main className="flex flex-col flex-1">
+                <header className="flex items-center justify-between px-6 py-4 h-[50px]">
+                    <div className="gap-1 flex items-center">
+                        <Button variant="outline" className="border group hover:bg-cyan-500 dark:hover:text-cyan-500 dark:hover:border-cyan-500 dark:hover:bg-transparent hover:text-white" asChild>
+                            <Link href="/dashboard/">
+                                Dashboard
+                            </Link>
+                        </Button>
+                        <Button variant="outline" className="border group hover:bg-violet-500 hover:text-white dark:hover:text-violet-400 dark:hover:bg-transparent dark:hover:border-violet-400" asChild>
+                            <Link href="/dashboard/pricing">
+                                Upgrade <Star className="ml-2 w-4 h-4 text-yellow-500 group-hover:fill-yellow-200" />
+                            </Link>
+                        </Button>
+                        <Button variant="outline" className="border group hover:bg-violet-500 hover:text-white dark:hover:text-violet-400 dark:hover:bg-transparent dark:hover:border-violet-400" asChild>
+                            <Link href="/dashboard/pricing">
+                                Editor <Edit2 className="ml-2 w-4 h-4 text-green-500 group-hover:fill-green-200" />
+                            </Link>
+                        </Button>
+                        <Button variant="outline" className="border group hover:bg-violet-500 hover:text-white dark:hover:text-violet-400 dark:hover:bg-transparent dark:hover:border-violet-400" asChild>
+                            <Link href="/dashboard/pricing">
+                                Settings <Settings2 className="ml-2 w-4 h-4 text-gray-500 group-hover:fill-gray-200" />
+                            </Link>
+                        </Button>
+                        <ModeToggle />
+                        <div className="flex items-center gap-4">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" size="icon">
+                                        <User className="h-5 w-5" />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/dashboard/profile">Profile</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/dashboard/settings">Settings</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={handleSignOut} className={`w-full ${gradientButtonClass}`}>
+                                        <LogOut className="h-4 w-4 mr-2" />
+                                        Sign Out
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+                    </div>
+                </header>
+                <Separator />
+                <div className="flex-1 overflow-auto">
+                    <section className="sm:p-8 p-4 text-accent-foreground">
+                        {children}
+                    </section>
+                </div>
+            </main>
+        </div>
+    )
+};
 
 export default DashboardLayout;

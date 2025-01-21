@@ -53,7 +53,7 @@ const PricingPage = () => {
     };
 
     return (
-        <div className="min-h-screen pt-24 bg-gradient-to-br from-pink-50 via-pink-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black">
+        <div className="min-h-screen pt-24 bg-gradient-to-br rounded-md from-pink-50 via-pink-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black">
             <div className="container mx-auto px-4 py-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
