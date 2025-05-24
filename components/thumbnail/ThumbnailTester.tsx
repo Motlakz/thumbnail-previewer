@@ -170,7 +170,7 @@ export default function ThumbnailTester() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4">
+        <div id="previewer" className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4">
                 <Steps />
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

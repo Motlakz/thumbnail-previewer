@@ -149,7 +149,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="group px-8 py-4 bg-pink-500 dark:bg-cyan-500 text-white rounded-full font-bold hover:bg-pink-600 dark:hover:bg-cyan-400 transition-all shadow-lg"
             >
-              <Link href="/dashboard" className="highlight-mini flex items-center gap-3">
+              <Link href="#previewer" className="highlight-mini flex items-center gap-3">
                 Preview Your Thumbnail
                 <motion.div whileHover={{ rotate: 12 }}>
                   <Eye className="w-5 h-5" />
