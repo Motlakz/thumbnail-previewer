@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Coffee } from "lucide-react";
 import Image from "next/image";
-import Logo from "../../public/cutesy_thumbnail_logo.png";
 import { ModeToggle } from "./ModeToggle";
 
 export function Navbar() {
@@ -32,7 +31,7 @@ export function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 z-20 w-full transition-all duration-300 ${
+            className={`fixed top-0 z-10 w-full transition-all duration-300 ${
                 isScrolled
                     ? "bg-white/80 backdrop-blur-md dark:bg-gray-950/80 shadow-lg"
                     : "bg-transparent"
@@ -42,7 +41,7 @@ export function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                     <Link href="/" className="flex items-center gap-4">
                         <Image
-                            src={Logo}
+                            src={"/cutesy_thumbnail_logo.png"}
                             width={48}
                             height={48} 
                             alt="thumbnail previewer cutesy logo"

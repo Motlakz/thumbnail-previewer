@@ -449,7 +449,7 @@ export default function ThumbnailEditor({ imageUrl, onSave, onClose }: Thumbnail
         </div>
 
         <div className="flex gap-2 sm:flex-row flex-col">
-            <div className="flex-1 relative"> {/* This wrapper is important for absolute positioning */}
+            <div className="flex-1 relative">
                 <canvas
                     ref={canvasRef}
                     className="max-w-lg w-full h-auto border rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50"

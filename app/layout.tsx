@@ -3,7 +3,7 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
-import { Navbar } from "@/components/dashboard/Navbar";
+import { Navbar } from "@/components/Navbar";
 import { ReactNode } from "react";
 
 const quicksand = Quicksand({
